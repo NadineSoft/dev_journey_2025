@@ -13,6 +13,11 @@ class Birthday extends Component
     {
         $this->birthdays = ModelsBirthday::all();
     }
+
+    public function store()
+    {
+
+    }
     public function render()
     {
         return view('livewire.birthday');
