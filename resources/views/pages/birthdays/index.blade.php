@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
-@section('content')
-    @livewire('birthday')
-@endsection
+<x-layouts.app>
+    @livewire('birthday-list')
+    @livewire('birthday-form')
+</x-layouts.app>
