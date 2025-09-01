@@ -9,17 +9,11 @@
 
     <title>{{ config('app.name', 'Birthdays') }}</title>
 
-    @stack('head-scripts')
-
-    <!-- Scripts -->
-
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
     <!-- Favicon -->
     <link rel="icon" href="{{ url('img/favicon.svg') }}">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     @stack('styles')
 
@@ -31,6 +25,14 @@
 </head>
 <body class="overflow-x-hidden bg-white">
 <div id="app">
+    @include('layouts.navigation')
+    @isset($header)
+        <header class="bg-white dark:bg-gray-800 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+    @endisset
     <main class="flex flex-col h-full">
         {{ $slot }}
     </main>
