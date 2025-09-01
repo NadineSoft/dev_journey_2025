@@ -1,6 +1,5 @@
+@use './_default.scss' as *;
+@use './header.scss' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import '_default.scss';
-@import 'header.scss';
