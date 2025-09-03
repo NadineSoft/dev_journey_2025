@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use App\Models\Birthday;
@@ -17,7 +18,7 @@ class BirthdayList extends Component
     public $sortColumn = '';
     public $sortDirection = '';
 
-    protected $listeners = ['birthdaySaved' => 'refresh']; // in loc de refresh putea sa fie $refresh (care forteaza re-renderul)
+    protected $listeners = ['birthdaySaved' => '$refresh']; // in loc de refresh putea sa fie $refresh (care forteaza re-renderul)
 
     public function refresh($message)
     {
@@ -45,9 +46,15 @@ class BirthdayList extends Component
 
     public function delete($id)
     {
-        Birthday::destroy($id);
-        session()->flash('message', 'Birthday has been deleted');
-        $this->resetPage(); // reseteaza paginarea sa nu ramin cu pagina goala
+        try {
+            $birthday = Birthday::findOrFail($id);
+            $this->authorize('delete', $birthday);
+            Birthday::where('id',$id)->where('user_id',auth()->id())->delete();
+            $this->dispatch('toast', type:'success', message:'Deleted');
+        } catch (AuthorizationException $e) {
+            $this->dispatch('toast', type:'error', message:'Not allowed');
+        }
+        $this->resetPage();
     }
     public function render()
     {

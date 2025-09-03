@@ -24,8 +24,8 @@ class BirthdayForm extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'day' => 'required|integer|between:1,31',
-            'month' => 'required|integer|between:1,12',
+            'day' => 'required|numeric|between:1,31',
+            'month' => 'required|numeric|between:1,12',
             'year' => 'nullable|integer|digits:4|between:1900,'. now()->year,
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
@@ -55,10 +55,11 @@ class BirthdayForm extends Component
     public function loadBirthday($id)
     {
         $birthday = Birthday::findOrFail($id);
+        $this->authorize('view', $birthday);
         $this->birthdayId = $birthday->id;
         $this->name = $birthday->name;
-        $this->day = $birthday->day;
-        $this->month = $birthday->month;
+        $this->day = str_pad($birthday->day, 2, '0', STR_PAD_LEFT); // Format 03
+        $this->month = str_pad($birthday->month, 2, '0', STR_PAD_LEFT); // Format 08
         $this->year = $birthday->year;
         $this->notes = $birthday->notes;
         $this->avatar = null;
@@ -69,16 +70,19 @@ class BirthdayForm extends Component
     {
         $this->validate();
 
+        $day = (int) ltrim($this->day, '0');
+        $month = (int) ltrim($this->month, '0');
+
         $birthday = Birthday::updateOrCreate(
             ['id' => $this->birthdayId, 'user_id' => auth()->id()],
-            ['name' => $this->name, 'user_id' => auth()->id(), 'day' => $this->day, 'month' => $this->month, 'year' => $this->year > 0 ? $this->year : null, 'notes' => $this->notes]
+            ['name' => $this->name, 'user_id' => auth()->id(), 'day' => $day, 'month' => $month, 'year' => $this->year > 0 ? $this->year : null, 'notes' => $this->notes]
         );
 
         if ($this->avatar != null) {
             $birthday->addMedia($this->avatar)->toMediaCollection('profile_image');
         }
 
-        $this->dispatch('birthdaySaved',message : 'The birthday has been saved');
+        $this->dispatch('toast', type:'success', message:'The birthday has been saved');
         $this->showModal = false;
         $this->resetForm();
     }
