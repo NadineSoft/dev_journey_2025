@@ -17,21 +17,21 @@
                 <div class="flex justify-between gap-2">
                     <div>
                         <label for="day">Day</label>
-                        <input id="day" wire:model="day" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('day') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
+                        <input id="day" wire:model="day" type="number" placeholder="DD" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('day') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
                         @error('day')
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label for="month">Month</label>
-                        <input id="month" wire:model="month" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('month') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
+                        <input id="month" wire:model="month" type="number" placeholder="MM" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('month') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
                         @error('month')
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label for="year">Year</label>
-                        <input id="year" wire:model="year" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('year') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
+                        <input id="year" placeholder="YYYY" wire:model="year" class="w-full border rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent {{ $errors->has('year') ? 'border-red-700' : 'border-gray-300' }} focus:border-purple-1000 focus:rounded-[4px]" />
                         @error('year')
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
