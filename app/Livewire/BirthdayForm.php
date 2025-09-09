@@ -83,6 +83,7 @@ class BirthdayForm extends Component
         }
 
         $this->dispatch('toast', type:'success', message:'The birthday has been saved');
+        $this->dispatch('birthdaySaved');
         $this->showModal = false;
         $this->resetForm();
     }

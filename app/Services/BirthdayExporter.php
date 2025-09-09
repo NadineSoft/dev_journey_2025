@@ -20,10 +20,14 @@ class BirthdayExporter
                 '="'.str_pad($row['day'],2,'0', STR_PAD_LEFT).'"',
                 '="'.str_pad($row['month'],2,'0', STR_PAD_LEFT).'"',
                 $row['year'] ?? '',
-                $row['notes'] ?? '']);
+                $row['notes'] ?? '',
+            ]);
+
         }
         rewind($tmp);
-        return stream_get_contents($tmp);
+        $csv = stream_get_contents($tmp);
+
+        return "\xEF\xBB\xBF" . $csv; // BOM pentru Excel
     }
 
     public function toIcs(int $userId): string
@@ -52,6 +56,12 @@ class BirthdayExporter
         $lines[] = 'END:VCALENDAR';
         return implode("\r\n", $lines)."\r\n";
     }
+
+    private function xlsText(string $v): string
+    {
+        return '=\"'.str_replace('\"','\"\"',$v).'\"';
+    }
+
 
 
 }

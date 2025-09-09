@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="birthdays.csv"',
         ]);
-    })->name('export.csv');
+    })->middleware('throttle:30,1')->name('export.csv');
 
     Route::get('/export/ics', function (BirthdayExporter $exp) {
         $ics = $exp->toIcs(auth()->id());
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
             'Content-Type' => 'text/calendar; charset=utf-8',
             'Content-Disposition' => 'attachment; filename="birthdays.ics"',
         ]);
-    })->name('export.ics');
+    })->middleware('throttle:30,1')->name('export.ics');
 });
 
 require __DIR__.'/auth.php';

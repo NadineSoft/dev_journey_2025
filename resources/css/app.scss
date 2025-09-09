@@ -3,3 +3,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center rounded-2xl font-medium
+        transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+        disabled:opacity-60 disabled:pointer-events-none;
+    }
+    .btn-primary {
+        @apply bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:ring-indigo-600
+        dark:bg-indigo-500 dark:hover:bg-indigo-600;
+    }
+    .btn-secondary {
+        @apply border border-slate-300 text-slate-800 hover:bg-slate-50 bg-blue-300
+        dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800;
+    }
+    .btn-danger {
+        @apply bg-rose-600 text-white hover:bg-rose-700 focus-visible:ring-rose-600;
+    }
+    .btn-sm { @apply h-9 px-3 text-sm; }
+    .btn-md { @apply h-10 px-4 text-sm; }
+    .btn-lg { @apply h-11 px-5 text-base; }
+}
