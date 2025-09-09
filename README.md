@@ -59,6 +59,7 @@ php artisan test
 - **CRUD & Media:** Spatie Medialibrary pentru avatar/poze.
 - **Filtre/Sort/Search:** `this_week`, `upcoming`, order by `name`/`date`, search cu reset pe pagina 1.
 - **Policies & UI:** `@can` în Blade + `$this->authorize()` în Livewire.
+- **Data isolation per user”** (UI @can + backend authorize + filtre user_id).
 - **Export:** `GET /export/csv`, `GET /export/ics` (day/month păstrate cu zero în față).
 - **Notificări (S2):** job + scheduler (în lucru).
 - **API (S2):** Sanctum token + rate limit (în lucru).
