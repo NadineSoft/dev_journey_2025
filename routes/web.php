@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Services\BirthdayExporter;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/export/csv',function(BirthdayExporter $exp) {
+        $csv = $exp->toCsv(auth()->id());
+        return response($csv, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="birthdays.csv"',
+        ]);
+    })->name('export.csv');
+
+    Route::get('/export/ics', function (BirthdayExporter $exp) {
+        $ics = $exp->toIcs(auth()->id());
+        return response($ics, 200, [
+            'Content-Type' => 'text/calendar; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="birthdays.ics"',
+        ]);
+    })->name('export.ics');
 });
 
 require __DIR__.'/auth.php';
