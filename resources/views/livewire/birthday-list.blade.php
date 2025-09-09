@@ -56,7 +56,9 @@
                                 <x-icon-pencil class="icon-svg w-4 h-4 cursor-pointer" wire:click="$dispatch('editBirthday', { 'id' : {{ $bd->id }} })" />
                             </td>
                             <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-800">
-                                <x-icon-trash class="icon-svg w-4 h-4 text-red-800 cursor-pointer" wire:click="delete({{ $bd->id }})" />
+                                @can ('delete', $bd)
+                                    <x-icon-trash class="icon-svg w-4 h-4 text-red-800 cursor-pointer" wire:click="delete({{ $bd->id }})" />
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
