@@ -5,6 +5,12 @@
                    class="w-full flex-1 border border-gray-900 rounded-[4px] h-10 px-3 text-sm text-neutral-weak placeholder:text-neutral-weak focus:ring-none focus:ring-transparent invalid:border-red-700 focus:invalid:border-red-700 focus:border-purple-1000 focus:rounded-[4px]" />
             <x-icon-search class="w-4 h-4 icon-svg absolute right-2 my-auto top-0 bottom-0" />
         </div>
+        <div>
+            <a href="{{ route('export.csv') }}" class="flex h-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Export Csv</a>
+        </div>
+        <div>
+            <a href="{{ route('export.ics') }}" class="flex h-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Export Ics</a>
+        </div>
         <div class="">
             <select wire:model.live="range">
                 <option value=""></option>
