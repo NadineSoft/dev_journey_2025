@@ -10,7 +10,7 @@ Aplicație Laravel + Livewire pentru gestionarea aniversărilor și trimiterea d
 
 ## Installation
 ```bash
-git clone https://github.com/username/project.git
+git clone git clone https://github.com/NadineSoft/dev_journey_2025.git
 cd project
 composer install
 npm install
@@ -41,3 +41,25 @@ Update `.env` file with your own values:
 ```bash
 php artisan test
 ```
+
+## ✅ Features
+
+- [x] Auth (Breeze)
+- [x] CRUD Birthdays + Media (Spatie)
+- [x] Filtre + sortări + search
+- [x] Policies + `@can` + toasts
+- [x] Export CSV/ICS
+- [ ] Notificări email (S2)
+- [ ] API read-only (Sanctum)
+
+<details>
+  <summary>Detalii</summary>
+
+- **Auth (Breeze):** login/register, protecție rute.
+- **CRUD & Media:** Spatie Medialibrary pentru avatar/poze.
+- **Filtre/Sort/Search:** `this_week`, `upcoming`, order by `name`/`date`, search cu reset pe pagina 1.
+- **Policies & UI:** `@can` în Blade + `$this->authorize()` în Livewire.
+- **Export:** `GET /export/csv`, `GET /export/ics` (day/month păstrate cu zero în față).
+- **Notificări (S2):** job + scheduler (în lucru).
+- **API (S2):** Sanctum token + rate limit (în lucru).
+</details>

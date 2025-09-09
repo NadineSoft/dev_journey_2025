@@ -1,5 +1,5 @@
 {{-- <!DOCTYPE HTML> --}}
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="!bg-white">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +63,7 @@
                 x-transition:leave="transition ease-in duration-150"
                 x-transition:leave-start="opacity-100 translate-y-0"
                 x-transition:leave-end="opacity-0 translate-y-2"
-                class="pointer-events-auto rounded-2xl shadow-lg border p-4 bg-white dark:bg-neutral-900"
+                class="pointer-events-auto rounded-2xl shadow-lg border p-4 dark:bg-neutral-900"
                 :class="variantClasses(t.type)"
                 role="status"
             >
@@ -130,10 +130,18 @@
 
             variantClasses(type) {
                 switch (type) {
-                    case 'success': return 'border-emerald-200 text-emerald-900 dark:text-emerald-100 dark:border-emerald-800';
-                    case 'error':   return 'border-rose-200 text-rose-900 dark:text-rose-100 dark:border-rose-800';
-                    case 'warning': return 'border-amber-200 text-amber-900 dark:text-amber-100 dark:border-amber-800';
-                    default:        return 'border-slate-200 text-slate-900 dark:text-slate-100 dark:border-slate-800';
+                    case 'success':
+                        return 'border-emerald-200 bg-emerald-50 text-emerald-900 ' +
+                            'dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-100';
+                    case 'error':
+                        return 'border-rose-200 bg-rose-50 text-rose-900 ' +
+                            'dark:border-rose-800 dark:bg-rose-900/30 dark:text-rose-100';
+                    case 'warning':
+                        return 'border-amber-200 bg-amber-50 text-amber-900 ' +
+                            'dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-100';
+                    default:
+                        return 'border-slate-200 bg-white text-slate-900 ' +
+                            'dark:border-slate-800 dark:bg-slate-800 dark:text-slate-100';
                 }
             },
 

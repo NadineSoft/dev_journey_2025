@@ -6,10 +6,13 @@
             <x-icon-search class="w-4 h-4 icon-svg absolute right-2 my-auto top-0 bottom-0" />
         </div>
         <div>
-            <a href="{{ route('export.csv') }}" class="flex h-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Export Csv</a>
+            <a href="{{ route('export.csv') }}"
+               x-data
+               x-on:click="$dispatch('toast', {type:'info', message:'Export started…'})"
+               class="btn btn-secondary btn-md">Export Csv</a>
         </div>
         <div>
-            <a href="{{ route('export.ics') }}" class="flex h-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Export Ics</a>
+            <a href="{{ route('export.ics') }}" class="btn btn-secondary btn-md">Export Ics</a>
         </div>
         <div class="">
             <select wire:model.live="range">
