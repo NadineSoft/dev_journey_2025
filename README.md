@@ -48,7 +48,7 @@ php artisan test
 - [x] CRUD Birthdays + Media (Spatie)
 - [x] Filtre + sortări + search
 - [x] Policies + `@can` + toasts
-- [x] Export CSV/ICS
+- [x] Export CSV/ICS (via ExportController)
 - [ ] Notificări email (S2)
 - [ ] API read-only (Sanctum)
 
