@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function birthday()
+    {
+        return $this->hasMany(Birthday::class); // Sau hasOne dacă un user are un birthday
+    }
 }
