@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class CheckBDDates extends Command
+class BirthdaysCheckCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -93,9 +93,11 @@ class CheckBDDates extends Command
         foreach ($grouped as $userId => $userBirthdays) {
             $user = $userBirthdays->first()->user; // Din eager load
             if ($user && $user->email) {
-                SendBirthdayEmail::dispatch($user, $userBirthdays);
+//                SendBirthdayEmail::dispatch($user, $userBirthdays);
+                SendBirthdayEmail::dispatch($user->id, $userBirthdays->pluck('id')->all());
             }
         }
-        $this->info('Checked birthdays and dispatched emails.');
+        //$this->info('Checked birthdays and dispatched emails.');
+        return self::SUCCESS;
     }
 }

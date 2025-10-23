@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\WeeklyBirthdaysMail;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -18,12 +19,15 @@ class SendBirthdayEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public int $tries = 3;
+    public int $timeout = 50;
+
     /**
      * Create a new job instance.
      */
     public function __construct(
-        public $user,
-        public $birthdays
+        public $userId,
+        public $birthdayIds
     )
     {
         //
@@ -34,8 +38,10 @@ class SendBirthdayEmail implements ShouldQueue
      */
     public function handle()
     {
+        $user = User::find($this->userId);
+        $birthdays = Birthday::whereIn('id', $this->birthdayIds)->get();
         try {
-            Mail::to($this->user->email)->send(new WeeklyBirthdaysMail($this->user->name, $this->birthdays));
+            Mail::to($user->email)->send(new WeeklyBirthdaysMail($user->name, $birthdays));
             Log::info('Email sent successfully!');
         } catch (\Exception $e) {
             Log::error('Eroare la trimitere email: ' . $e->getMessage());

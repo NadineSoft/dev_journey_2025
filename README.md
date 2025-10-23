@@ -49,7 +49,7 @@ php artisan test
 - [x] Filtre + sortări + search
 - [x] Policies + `@can` + toasts
 - [x] Export CSV/ICS (via ExportController)
-- [ ] Notificări email (S2)
+- [x] Notificări email (S2)
 - [ ] API read-only (Sanctum)
 
 <details>
@@ -61,6 +61,6 @@ php artisan test
 - **Policies & UI:** `@can` în Blade + `$this->authorize()` în Livewire.
 - **Data isolation per user”** (UI @can + backend authorize + filtre user_id).
 - **Export:** `GET /export/csv`, `GET /export/ics` (day/month păstrate cu zero în față).
-- **Notificări (S2):** job + scheduler (în lucru).
+- **Notificări (S2):** job + scheduler (în lucru). Comanda bd:check
 - **API (S2):** Sanctum token + rate limit (în lucru).
 </details>

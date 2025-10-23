@@ -1,6 +1,6 @@
 <?php
 
-use App\Console\Commands\CheckBDDates;
+use App\Console\Commands\BirthdaysCheckCommand;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -10,4 +10,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 
-Schedule::command(CheckBDDates::class)->daily();
+Schedule::command(BirthdaysCheckCommand::class)->daily();
