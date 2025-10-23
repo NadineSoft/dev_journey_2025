@@ -107,7 +107,7 @@
         Alpine.data('toastStore', () => ({
             toasts: [],
             counter: 0,
-            defaultTimeout: 2800,
+            defaultTimeout: 3500,
 
             add({ type = 'info', message = '', title = null, timeout = null } = {}) {
                 const id = ++this.counter;

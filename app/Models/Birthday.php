@@ -22,15 +22,21 @@ class Birthday extends Model implements HasMedia
         'user_id',
     ];
 
+    // Birthday → User e o relație BelongsTo (un Birthday aparține unui User).
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     public function getDisplayDateAttribute(): string
     {
         $d = str_pad($this->day, 2, '0', STR_PAD_LEFT);
         $m = str_pad($this->month, 2, '0', STR_PAD_LEFT);
         if ($this->year) {
-            return \Carbon\Carbon::create($this->year, $this->month, $this->day)->format('d M Y');
+            return \Carbon\Carbon::create($this->year, $this->month, $this->day)->format('F, j Y');
         }
-        return \Carbon\Carbon::create(2000, $this->month, $this->day)->format('d M');
+        return \Carbon\Carbon::create(2000, $this->month, $this->day)->format('F, j');
     }
 
 
